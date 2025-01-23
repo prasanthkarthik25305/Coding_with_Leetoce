@@ -8,21 +8,20 @@ public:
        prefix[i]=prefix[i-1]+nums[i-1];
        // else prefix[i]=nums[i];
        }
-       set<pair<long long,int>>st;
+       deque<int>dq;
        for(int i=0,j=0;i<=nums.size();i++){
-          while(!st.empty() and prefix[i]-(st.begin()->first)>=k){
-            ans=min(ans,i-st.begin()->second);
-             cout<< st.begin()->first<<" "<<st.begin()->second<<' '<<i<<'\n';
-             st.erase(st.begin());
-           
+          while(!dq.empty() and prefix[i]-prefix[dq.front()]>=k){
+           // cout<<dq.front();
+            ans=min(ans,i-dq.front());
+            dq.pop_front();
+             //cout<< st.begin()->first<<" "<<st.begin()->second<<' '<<i<<'\n';
            // cout<<ans;
-            //  j++;
           }
-          while(!st.empty() and (prefix[i]<=st.rbegin()->first)){
-            st.erase(prev(st.end()));
+          while(!dq.empty() and (prefix[i]<prefix[dq.back()])){
+           dq.pop_back();
            // cout<<"s"<<' ';
           }
-          st.insert({prefix[i],i});
+          dq.push_back(i);
        } 
        return (ans!=nums.size()+1)?ans:-1;
      //  #undef int
