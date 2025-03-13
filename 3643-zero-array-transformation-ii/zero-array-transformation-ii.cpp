@@ -1,3 +1,8 @@
+#include <vector>
+#include <numeric>  // For accumulate
+
+using namespace std;
+
 class Solution {
 public:
     bool predicate(int mid, int n, vector<int>& nums, vector<vector<int>>& queries) {
@@ -26,21 +31,21 @@ public:
     }
 
     int minZeroArray(vector<int>& nums, vector<vector<int>>& queries) {
-        long long sum = accumulate(nums.begin(), nums.end(), 0LL); 
+        long long sum = accumulate(nums.begin(), nums.end(), 0LL);  
         if (sum == 0) return 0;
 
         int n = nums.size();
-        int res = -1, l = 0, r = queries.size() - 1;
-
-        while (l <= r) {
+        int res = -1, l = -1, r = queries.size();  
+        while (l + 1 < r) {  
             int mid = (l + r) / 2;
             if (predicate(mid, n, nums, queries)) {
-                res = mid + 1;
-                r = mid - 1; 
+                r = mid; 
             } else {
-                l = mid + 1; 
+                l = mid; 
             }
         }
-        return res;
+
+        // `r` is now the smallest valid index
+        return (r == queries.size()) ? -1 : r + 1;
     }
 };
