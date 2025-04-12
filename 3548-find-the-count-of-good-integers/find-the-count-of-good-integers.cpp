@@ -9,7 +9,7 @@ struct myhash {
         long long h = 0;
         for (int i = 0; i < 10; i++) {
             h^= primes[i] * v[i];
-            h += (h << 4);
+            //h += (h << 4);
         }
         return h;
     }
