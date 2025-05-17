@@ -1,6 +1,5 @@
 class Solution {
 public:
-    vector<vector<string>>ans;
     vector<int>que;
     
     //check 
@@ -13,26 +12,22 @@ public:
         }
         return true;
     }
-    void rec(int row,int n,vector<string>sol){
+    int rec(int row,int n){
         if(row==n){
-            ans.push_back(sol);
-            return;
+            return 1;
         }
+        int ans=0;
         for(int col=0;col<n;col++){
             if(check(row,col)){
                 que[row]=col;
-                sol[row][col]='Q';
-                rec(row+1,n,sol);
-                 sol[row][col]='.';
+                ans+=rec(row+1,n);
                 que[row]=-1;
             }
         }
+        return ans;
     }
     int totalNQueens(int n) {
-        ans.clear();
          que = vector<int>(n, -1);
-        vector<string>sol(n,string(n,'.'));
-        rec(0,n,sol);
-        return ans.size();
+        return rec(0,n);
     }
 };
