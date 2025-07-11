@@ -2,18 +2,19 @@ class Solution {
 public:
     int findCenter(vector<vector<int>>& edges) {
         map<int,int>mp;
-        for(auto edge:edges) {
-            mp[edge[0]]++;
-            mp[edge[1]]++;
+        int cnt=0,ans=0;
+        for(int i=0;i<2;i++){
+          mp[edges[i][0]]++;
+          mp[edges[i][1]]++;
         }
-
-        int maxy=0,ans=0;
         for(auto i:mp){
-            if(i.second>maxy){
-             ans=i.first;
-             maxy=i.second;
+            if(i.second>cnt){
+                ans=i.first;
+                cnt=i.second;
             }
         }
         return ans;
+
+
     }
 };
