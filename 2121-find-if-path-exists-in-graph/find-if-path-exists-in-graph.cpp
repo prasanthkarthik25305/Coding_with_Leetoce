@@ -2,17 +2,16 @@ class Solution {
 public:
    vector<bool>chk;
 bool dfs(int node, int destination, vector<vector<int>>& adj) {
-    if (node == destination) return true;
     chk[node] = true;
 
     for (auto neighbor : adj[node]) {
         if (!chk[neighbor]) {
-            if (dfs(neighbor, destination, adj)) {
-                return true;
-            }
+            
+             dfs(neighbor, destination, adj);
+            
         }
     }
-    return false;
+    return chk[destination];
 }
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) { 
         chk.resize(n+1,false);
@@ -23,6 +22,5 @@ bool dfs(int node, int destination, vector<vector<int>>& adj) {
         }
 
        return dfs(source,destination,adj);
-        
     }
 };
