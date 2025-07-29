@@ -39,8 +39,8 @@ public:
       ll ans3=0;
 
        int n=s.size();
-      vector<ll>prefix(n+1,0);
-      vector<ll>suffix(n+1,0);
+      vector<int>prefix(n+1,0);
+      vector<int>suffix(n+1,0);
       for(int i=0;i<n;i++){
         if(s[i]=='L') prefix[i+1]=1;
       }
@@ -58,7 +58,7 @@ public:
       ll maxy=0;
      for(int i=0;i<n;i++){
         if(s[i]!='C'){
-            maxy=max(maxy,prefix[i+1]*suffix[i+1]);
+            maxy=max(maxy,1LL*prefix[i+1]*suffix[i+1]);
         }
         else ans3+=prefix[i+1]*suffix[i+1];
      }
