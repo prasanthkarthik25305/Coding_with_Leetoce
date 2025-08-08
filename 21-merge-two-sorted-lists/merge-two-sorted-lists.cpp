@@ -28,11 +28,13 @@ public:
         }
         while(temp1){
             dummy->next=temp1;
-            break;
+            temp1=temp1->next;
+            dummy=dummy->next;
         }
         while(temp2) {
             dummy->next=temp2;
-            break;
+            temp2=temp2->next;
+            dummy=dummy->next;
         }
       return dum->next;
     }
