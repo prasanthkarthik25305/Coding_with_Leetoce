@@ -11,23 +11,16 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        ListNode* temp1=list1;
-        ListNode* temp2=list2;
-        ListNode * dummy= new ListNode(0);
-        ListNode * dum=dummy;
-        while(temp1 and temp2) {
-            if(temp1->val>temp2->val){
-                dummy->next=temp2;
-                temp2=temp2->next;
-            }
-            else{
-                dummy->next=temp1;
-                temp1=temp1->next;
-            }
-            dummy=dummy->next;
-        }
-     if(temp2) dummy->next=temp2;
-     else dummy->next=temp1;
-      return dum->next;
+    if (!list1) return list2;
+    if (!list2) return list1;
+
+    // Recursive case
+    if (list1->val < list2->val) {
+        list1->next = mergeTwoLists(list1->next, list2);
+        return list1;
+    } else {
+        list2->next = mergeTwoLists(list1, list2->next);
+        return list2;
+    }
     }
 };
