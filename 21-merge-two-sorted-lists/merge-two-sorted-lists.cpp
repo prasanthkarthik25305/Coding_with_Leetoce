@@ -26,16 +26,8 @@ public:
             }
             dummy=dummy->next;
         }
-        while(temp1){
-            dummy->next=temp1;
-            temp1=temp1->next;
-            dummy=dummy->next;
-        }
-        while(temp2) {
-            dummy->next=temp2;
-            temp2=temp2->next;
-            dummy=dummy->next;
-        }
+     if(temp2) dummy->next=temp2;
+     else dummy->next=temp1;
       return dum->next;
     }
 };
