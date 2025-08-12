@@ -1,35 +1,40 @@
 class Solution {
 public:
-    const int mod =1e9+7;
+    const int mod = 1e9 + 7;
     int dp[301][301];
-    int rec(int n,int x,int sum,int tar) {
-       
-        if(sum>tar) return 0;
-        if(sum==tar) return 1;
-        if(n>tar) return 0;
-        if(dp[n][sum]!=-1) return dp[n][sum];
-       long long  res1=0,res2=0,add=1,val=0;
-      for(int i=1;i<=x;i++){
-        add=(add*n)%mod;
-      }
-     // cout<<add<<'\n';
-        val= (sum+add)%mod;
-        // cout<<sum<<'\n';
-        res1=(res1+rec(n+1,x,val,tar))%mod;
-       // cout<<sum<<'\n';
-        res2=(res2+rec(n+1,x,sum,tar))%mod;
-        
-        return dp[n][sum]=(res1+res2)%mod;
+    vector<int> power;
+
+    int rec(int num, int sum, int n) {
+        if (sum == n)
+            return 1;
+        if (sum > n || num >= power.size())
+            return 0;
+
+        if (dp[num][sum] != -1)
+            return dp[num][sum];
+
+        long long res = 0;
+        if (sum + power[num] <= n)
+            res += rec(num + 1, sum + power[num], n);
+        res += rec(num + 1, sum, n);
+
+        return dp[num][sum] = res % mod;
     }
+
     int numberOfWays(int n, int x) {
-    memset(dp,-1,sizeof(dp));
+        memset(dp, -1, sizeof(dp));
+       // power.clear();
+        power.push_back(0); // index 0 unused
 
-     int ans=  rec(1,x,0,n);
-    // cout<<"First"<<'\n';
-    // for(auto i=0;i<=n;i++){
-    //     cout<<dp[i][x]<<'\n';
-    // }
+        for (int i = 1;; i++) {
+            long long val = 1;
+            for (int j = 1; j <= x; j++)
+                val *= i;
+            if (val > n)
+                break; // stop early to keep power small
+            power.push_back((int)val);
+        }
 
-    return ans;
+        return rec(1, 0, n);
     }
 };
