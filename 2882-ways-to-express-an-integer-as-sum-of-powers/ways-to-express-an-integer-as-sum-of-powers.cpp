@@ -3,8 +3,10 @@ public:
     const int mod =1e9+7;
     int dp[301][301];
     int rec(int n,int x,int sum,int tar) {
+       
+        if(sum>tar) return 0;
         if(sum==tar) return 1;
-        if(sum>tar|| n>tar) return 0;
+        if(n>tar) return 0;
         if(dp[n][sum]!=-1) return dp[n][sum];
        long long  res1=0,res2=0,add=1,val=0;
       for(int i=1;i<=x;i++){
