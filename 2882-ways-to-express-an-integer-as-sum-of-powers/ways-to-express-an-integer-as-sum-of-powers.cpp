@@ -5,7 +5,7 @@ public:
     int rec(int n,int x,int sum,int tar) {
         if(sum==tar) return 1;
         if(sum>tar|| n>tar) return 0;
-        if(sum>=0 and dp[n][sum]!=-1) return dp[n][sum];
+        if(dp[n][sum]!=-1) return dp[n][sum];
        long long  res1=0,res2=0,add=1,val=0;
       for(int i=1;i<=x;i++){
         add=(add*n)%mod;
