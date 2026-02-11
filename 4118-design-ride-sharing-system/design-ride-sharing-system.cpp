@@ -2,7 +2,6 @@ class RideSharingSystem {
 public:
     queue<int> riders, drivers;
     unordered_set<int> cancelled;
-    unordered_set<int> matched;
     unordered_set<int> waiting;
 
     RideSharingSystem() {}
@@ -30,7 +29,6 @@ public:
         int d = drivers.front(); drivers.pop();
         int r = riders.front(); riders.pop();
 
-        matched.insert(r);
         waiting.erase(r);
 
         return {d, r};
