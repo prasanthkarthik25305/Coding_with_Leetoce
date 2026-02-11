@@ -25,7 +25,7 @@ public:
 
         int d=drivers.front();
         int r=riders.front();
-        //waiting.erase(r);
+        waiting.erase(r);
         drivers.pop();
         riders.pop();
         return {d,r};
