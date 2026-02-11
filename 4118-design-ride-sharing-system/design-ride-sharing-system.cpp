@@ -1,47 +1,43 @@
 class RideSharingSystem {
 public:
-    queue<int> riders, drivers;
-    unordered_set<int> cancelled;
-    unordered_set<int> waiting;
-
+   queue<int>riders;
+   queue<int>drivers;
+    unordered_set<int> cancel;
+    unordered_set<int>waiting;
     RideSharingSystem() {}
-
     void addRider(int riderId) {
         riders.push(riderId);
         waiting.insert(riderId);
     }
-
+    
     void addDriver(int driverId) {
+
         drivers.push(driverId);
     }
-
+    
     vector<int> matchDriverWithRider() {
-        // remove cancelled riders lazily
-        while (!riders.empty() && cancelled.count(riders.front())) {
-            cancelled.erase(riders.front());
-            waiting.erase(riders.front());
+        while(!riders.empty() and cancel.count(riders.front())){
+            cancel.erase(riders.front());
             riders.pop();
         }
+       
+        if(drivers.empty() || riders.empty()) return {-1,-1};
 
-        if (drivers.empty() || riders.empty())
-            return {-1, -1};
-
-        int d = drivers.front(); drivers.pop();
-        int r = riders.front(); riders.pop();
-
-        waiting.erase(r);
-
-        return {d, r};
+        int d=drivers.front();
+        int r=riders.front();
+        //waiting.erase(r);
+        drivers.pop();
+        riders.pop();
+        return {d,r};
     }
-
+    
     void cancelRider(int riderId) {
-        // cancel ONLY if rider is currently waiting
-        if (waiting.count(riderId)) {
-            cancelled.insert(riderId);
+        if(waiting.count(riderId)){
+      cancel.insert(riderId);
         }
+      
     }
 };
-
 
 /**
  * Your RideSharingSystem object will be instantiated and called as such:
