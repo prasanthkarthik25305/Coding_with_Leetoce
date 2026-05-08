@@ -19,9 +19,9 @@ public:
         int res=0;
         for(int i=1;i<=n;i++){
            res+=chk_digit(i);
-           if(chk_digit(i)==1){
-            cout<<1<<" "<<i<<'\n';
-           }
+        //    if(chk_digit(i)==1){
+        //     cout<<1<<" "<<i<<'\n';
+        //    }
 
         }
         return res;
